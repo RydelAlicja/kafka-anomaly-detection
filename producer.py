@@ -9,7 +9,7 @@ producer = KafkaProducer(
 
 def generate_transaction():
     tx_id = f"TX{random.randint(1000, 9999)}"
-    user_id = f"u{random.randint(1, 10):02d}" # Mniejszy zakres (1-10) szybciej wywoła alert
+    user_id = f"u{random.randint(1, 10):02d}" 
     return {
         "tx_id": tx_id,
         "user_id": user_id,
@@ -22,10 +22,8 @@ print("Producent ruszył... Wysyłam dane do Kafki.")
 
 while True:
     tx = generate_transaction()
-    # KLUCZOWE: wysyłamy do tematu 'transactions'
     producer.send('transactions', value=tx)
-    # KLUCZOWE: wymuszamy wysłanie z bufora na serwer
     producer.flush() 
     
     print(f"Wysłano: {tx['tx_id']} dla {tx['user_id']}")
-    time.sleep(0.2) # Przyspieszamy do 0.2s, żeby szybciej mieć alert na screenie
+    time.sleep(0.2) 
