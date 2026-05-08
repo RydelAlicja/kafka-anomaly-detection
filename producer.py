@@ -18,7 +18,6 @@ def generate_transaction():
         "timestamp": datetime.now().isoformat()
     }
 
-print("Producent ruszył... Wysyłam dane do Kafki.")
 
 while True:
     tx = generate_transaction()
@@ -26,4 +25,4 @@ while True:
     producer.flush() 
     
     print(f"Wysłano: {tx['tx_id']} dla {tx['user_id']}")
-    time.sleep(0.2) 
+    time.sleep(1) 
